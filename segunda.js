@@ -109,14 +109,5 @@ var exerciciosSegunda = [
         ],
         "reps" : "2x10 6kg",
         "img": "https://www.elhombre.com.br/wp-content/uploads/2014/07/Dumbbell_Shoulder_Press_M_WorkoutLabs.png"
-    },
-    {
-        "nome": "Face Pull",
-        "dicas": [ "Altura do peito",
-            "Puxar até atravessar a Testa",
-            "Contrair trapézio e escápulas",
-        ],
-        "reps" : "2x10 6kg",
-        "img": "https://treinomestre.com.br/wp-content/uploads/2019/10/face-pull-exercicio.jpg"
-    },
+    }
 ]
