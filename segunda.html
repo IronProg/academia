@@ -91,6 +91,14 @@
               <h1 class="text-xl text-bold">Exercícios Segunda</h1>
             </div>
             <div class="row" id="lista-exercicios"></div>
+            <div class="row">
+              <div class="col-6">
+                <p class="text-bold text-center">Resetar:</p>
+                <button class="btn btn-warning text-bold" id="reseta-marcacao">Marcações</button>
+                <button class="btn btn-danger text-bold" id="reseta-comentario">Comentários</button>
+                <button class="btn btn-secondary text-bold" id="reseta-data-storage">Data Storage</button>
+              </div>
+            </div>
           </div><!-- /.container-fluid -->
         </section>
       <!-- /.content-wrapper -->
@@ -119,7 +127,40 @@
   <script src="./core/monta-exercicios.js"></script>
   <script>
     $(document).ready(function() {
-      MontaExercicios(exerciciosSegunda);
+      let exercicios = localStorage.getItem("dbSegunda") ? JSON.parse(localStorage.getItem("dbSegunda")) : null;
+      if (!exercicios) {
+        localStorage.setItem("dbSegunda", JSON.stringify(exerciciosSegunda))
+        exercicios = exerciciosSegunda;
+      }
+      MontaExercicios(exercicios);
+
+      $(".checkbox-exercicio").on("click", function() {
+        let id = $(this).attr("data-id");
+        let exerciciosArray = JSON.parse(localStorage.getItem("dbSegunda"));
+        exerciciosArray.forEach(exercicio => {
+          if (exercicio.id === id) {
+            exercicio.marcado ? exercicio.marcado = false : exercicio.marcado = true;
+          }
+          localStorage.setItem("dbSegunda", JSON.stringify(exerciciosArray));
+        });
+      })
+      $(".btn-salva-comentario").on("click", function() {
+        let id = $(this).attr("data-id");
+        let exerciciosArray = JSON.parse(localStorage.getItem("dbSegunda"));
+        exerciciosArray.forEach(exercicio => {
+          if (exercicio.id === id) {
+            let novoComentario = $(this).parent().parent().children(".form-control").val();
+            console.log(novoComentario)
+            exercicio.comentario = novoComentario;
+          }
+          localStorage.setItem("dbSegunda", JSON.stringify(exerciciosArray));
+        });
+      })
+      $("#reseta-data-storage").on("click", function() {
+        localStorage.removeItem("dbSegunda");
+        location.reload();
+      });
     })
   </script>
+  <script src="./core/reset-buttons.js"></script>
 </html>
