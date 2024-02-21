@@ -150,7 +150,6 @@
         exerciciosArray.forEach(exercicio => {
           if (exercicio.id === id) {
             let novoComentario = $(this).parent().parent().children(".form-control").val();
-            console.log(novoComentario)
             exercicio.comentario = novoComentario;
           }
           localStorage.setItem("dbSegunda", JSON.stringify(exerciciosArray));
